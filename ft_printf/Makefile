@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mousaid <mousaid@student.42.fr>            +#+  +:+       +#+         #
+#    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/04 11:49:32 by amousaid          #+#    #+#              #
-#    Updated: 2023/12/01 00:24:53 by mousaid          ###   ########.fr        #
+#    Updated: 2024/01/22 18:15:31 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,3 +36,5 @@ fclean: clean
 re: fclean $(NAME)
 
 .PHONY: all clean fclean re
+
+.SILENT:

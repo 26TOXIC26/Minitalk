@@ -1,20 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/22 17:35:43 by amousaid          #+#    #+#             */
+/*   Updated: 2024/01/23 20:19:51 by amousaid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
 #include <signal.h>
-
-// void recieve(int sig)
-// {
-//     if  (sig == SIGUSR2)
-//         printf("recieved");
-// }
- 
-// void write_s()
-// {
-//     siginfo_t info;
-//     kill(info->si_pid,SIGUSR2)
-//     // write(1, "ryrha\n", 6);
-    
-// }
 
 void ft_send_bit(int pid, char *s)
 {
@@ -38,6 +36,12 @@ void ft_send_bit(int pid, char *s)
         i++;
     } 
 }
+void write_reply(int signal)
+{
+    if (signal == SIGUSR1 || signal == SIGUSR2)
+        ft_printf("SUCCESSFULY");
+    // exit(0);  
+}
 
 int main (int argc, char **argv)
 {
@@ -46,12 +50,20 @@ int main (int argc, char **argv)
         char    *str;
         int pid;
 
+        signal(SIGUSR1, write_reply);
+        signal(SIGUSR2, write_reply);
         pid = ft_atoi(argv[1]);
         str = argv[2];
         ft_send_bit(pid, str);
+        
+          while (1)
+        {
+           pause();
+        }
     }
     else if (argc > 3)
         ft_printf("You are write more than 2 argument");
     else
         ft_printf("You are write less than 2 argument");
+    
 }

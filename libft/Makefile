@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/04 10:31:55 by amousaid          #+#    #+#              #
-#    Updated: 2023/11/24 01:12:35 by amousaid         ###   ########.fr        #
+#    Updated: 2024/01/22 18:15:17 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,3 +83,5 @@ $(BOBJ): $(BONUS_SRC)
 	$(AR) $(NAME) $(BOBJ)
 
 bonus: $(BOBJ)
+
+.SILENT:

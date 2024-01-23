@@ -1,15 +1,25 @@
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/22 17:35:30 by amousaid          #+#    #+#             */
+/*   Updated: 2024/01/23 20:23:06 by amousaid         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
 
-void bit(int sig)
+void bit(int sig, siginfo_t *info, void *context)
 {
     static char char_bit;
     static int  num_bit;
 
-    // num_bit = 0;
+    context = NULL;
+
     if(num_bit <=  7)
     {   
         char_bit = (char_bit << 1);
@@ -20,28 +30,30 @@ void bit(int sig)
     if(char_bit && num_bit > 7) 
     {
         ft_printf("%c", char_bit);
+        
         num_bit = 0;
         char_bit = 0;
-    }
-    else
-    {
-        ft_printf("\n");
-        num_bit = 0;
-        char_bit = 0;
-    }
+    }  
+    else if (char_bit == '\n' || char_bit == '\0')
+        kill(info->si_pid ,SIGUSR2);     
 }
 
 
 int main(void)
 {
-    pid_t pid = getpid();
-    ft_printf("PID of my server : [%d]", pid );
+    pid_t pid;
+    struct sigaction sa;
 
-    while (1) {
-        signal(SIGUSR1, bit);
-        signal(SIGUSR2, bit);
+    sa.sa_sigaction = bit;
+    sa.sa_flags = SA_SIGINFO;
+    pid = getpid();
+    ft_printf("PID of my server : [%d]\n", pid);
+    
+    while (1) 
+    {
+        sigaction(SIGUSR1, &sa, NULL);
+        sigaction(SIGUSR2, &sa, NULL);
         // pause();
-        // usleep(1); // Sleep for 1 second or do some other work
     }
     return (0);
 }
