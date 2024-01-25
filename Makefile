@@ -6,13 +6,10 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 17:35:08 by amousaid          #+#    #+#              #
-#    Updated: 2024/01/23 18:54:46 by amousaid         ###   ########.fr        #
+#    Updated: 2024/01/25 22:41:43 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-GREEN=$(shell tput setaf 2)
-RED=$(shell tput setaf 1)
-RESET := $(shell tput sgr0)
 NAME = server client
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -35,26 +32,24 @@ $(NAME): $(LIBFT) $(FT_PRINTF) client.c server.c
 	$(CC) $(CFLAGS) $(SERVER_SRCS) $(LIBFT) $(FT_PRINTF) -o server
 	
 	$(CC) $(CFLAGS) $(CLIENT_SRCS) $(LIBFT) $(FT_PRINTF) -o client
-	@echo "$(GREEN)        		--------[DONE]--------"
-	@echo "$(GREEN)			|[LIBFT] $(RESET)is ready    $(GREEN)|"
-	@echo "$(GREEN)			|[FT_PRINTF] $(RESET)is ready$(GREEN)|"
-	@echo "$(GREEN)			|[SERVER] $(RESET)is ready.  $(GREEN)|"
-	@echo "$(GREEN)			|[CLIENT] $(RESET)is ready.  $(GREEN)|"
-	@echo "$(GREEN)        		--------[DONE]--------"
+	@echo "-----------[DONE]-----------"
+	@echo "[LIBFT] is ready           |"
+	@echo "[FT_PRINTF] is ready       |"
+	@echo "[SERVER] is ready.         |"
+	@echo "[CLIENT] is ready.         |"
+	@echo "-----------[DONE]-----------"
 clean:
 	$(MAKE) clean --no-print-directory -C ./libft
 	$(MAKE) clean --no-print-directory -C ./ft_printf
-	@echo "$(RED)			-----------[DONE]-----------"
-	@echo "$(RED)			|[LIBFT OBJ] $(RESET)is clean.     $(RED)|"
-	@echo "$(RED)			|[FT_PRINTF OBJ] $(RESET)is clean. $(RED)|"
-	@echo "$(RED)			|[MINITALK OBJ] $(RESET)is clean.  $(RED)|"
-	@echo "$(RED)			-----------[DONE]-----------"
+	@echo "-----------[DONE]-----------"
+	@echo "[LIBFT OBJ] is clean.	   |"
+	@echo "[FT_PRINTF OBJ] is clean.  |"
+	@echo "[MINITALK OBJ] is clean.   |"
 fclean: clean
 	$(MAKE) fclean --no-print-directory -C ./libft
 	$(MAKE) fclean --no-print-directory -C ./ft_printf
 	$(RM) $(NAME)
-	@echo "$(RED)			|[ALL MINITALK] $(RESET)is clean.  $(RED)|"
-	@echo "$(RED)			-----------[DONE]-----------"
+	@echo "[ALL MINITALK] is clean.   |"
 re: fclean all
 
 .SILENT:
