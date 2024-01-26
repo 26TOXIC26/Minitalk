@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:35:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/01/25 22:40:44 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:27:04 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void ft_send_bit(int pid, char *s)
     int i;
     int j;
     int next;
+    int pid_check;
 
     i = 0;
     j = ft_strlen(s);
@@ -28,7 +29,7 @@ void ft_send_bit(int pid, char *s)
         while (next >= 0)
         {
             if ((s[i] >> next) & 1)
-                kill(pid, SIGUSR1);
+                pid_check = kill(pid, SIGUSR1);
             else
                 kill(pid, SIGUSR2);
             usleep(9);
@@ -36,7 +37,8 @@ void ft_send_bit(int pid, char *s)
         }
         i++;
     }
-    
+    if (pid_check == -1)
+        ft_printf("[PID IS WRONG]\n");  
 }
 void write_reply(int signal)
 {

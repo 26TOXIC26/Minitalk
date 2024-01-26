@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:35:30 by amousaid          #+#    #+#             */
-/*   Updated: 2024/01/25 22:14:13 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:11:31 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int main()
     sa.sa_sigaction = bit;
     sa.sa_flags = SA_SIGINFO;
     pid = getpid();
-    ft_printf("PID of my server : [%d]\n", pid);
+    ft_printf("--------Welcom to my MINITALK--------\n");
+    ft_printf("            PID of server  \n               [%d]\n", pid);
     
     while (1) 
     {
