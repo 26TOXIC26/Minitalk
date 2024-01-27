@@ -6,11 +6,11 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 17:35:08 by amousaid          #+#    #+#              #
-#    Updated: 2024/01/25 22:41:43 by amousaid         ###   ########.fr        #
+#    Updated: 2024/01/27 01:18:54 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = server client
+NAME = server client server_bonus client_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT = ./libft/libft.a
@@ -19,6 +19,8 @@ RM = rm -rf
 
 SERVER_SRCS = server.c
 CLIENT_SRCS = client.c
+SERVER_BONUS_SRCS = server_bonus.c
+CLIENT_BONUS_SRCS = client_bonus.c
 
 all: $(NAME)
 
@@ -28,10 +30,11 @@ $(LIBFT):
 $(FT_PRINTF):
 		$(MAKE) --no-print-directory -C ./ft_printf
 		
-$(NAME): $(LIBFT) $(FT_PRINTF) client.c server.c
+$(NAME): $(LIBFT) $(FT_PRINTF) $(SERVER_SRCS) $(SERVER_BONUS_SRCS) $(CLIENT_SRCS) $(CLIENT_BONUS_SRCS)
 	$(CC) $(CFLAGS) $(SERVER_SRCS) $(LIBFT) $(FT_PRINTF) -o server
-	
+	$(CC) $(CFLAGS) $(SERVER_BONUS_SRCS) $(LIBFT) $(FT_PRINTF) -o server_bonus
 	$(CC) $(CFLAGS) $(CLIENT_SRCS) $(LIBFT) $(FT_PRINTF) -o client
+	$(CC) $(CFLAGS) $(CLIENT_BONUS_SRCS) $(LIBFT) $(FT_PRINTF) -o client_bonus
 	@echo "-----------[DONE]-----------"
 	@echo "[LIBFT] is ready           |"
 	@echo "[FT_PRINTF] is ready       |"

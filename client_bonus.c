@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 17:35:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/01/27 01:05:26 by amousaid         ###   ########.fr       */
+/*   Created: 2024/01/24 00:58:08 by amousaid          #+#    #+#             */
+/*   Updated: 2024/01/27 01:18:09 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 void	ft_send_bit(int pid, char *s)
 {
 	int	i;
+	int	j;
 	int	next;
 	int	pid_check;
 
 	i = 0;
-	while (s[i])
+	j = ft_strlen(s);
+	while (i <= j)
 	{
 		next = 7;
 		while (next >= 0)
@@ -39,6 +41,12 @@ void	ft_send_bit(int pid, char *s)
 		ft_printf("[PID IS WRONG]\n");
 }
 
+void	write_reply(int signal)
+{
+	if (signal == SIGUSR1)
+		ft_printf("[YOUR MESSAGE IS RECEIVED]\n");
+}
+
 int	main(int argc, char **argv)
 {
 	char	*str;
@@ -46,6 +54,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 3)
 	{
+		signal(SIGUSR1, write_reply);
 		pid = ft_atoi(argv[1]);
 		str = argv[2];
 		ft_send_bit(pid, str);
