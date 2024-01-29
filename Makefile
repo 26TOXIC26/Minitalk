@@ -6,11 +6,12 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 17:35:08 by amousaid          #+#    #+#              #
-#    Updated: 2024/01/27 01:18:54 by amousaid         ###   ########.fr        #
+#    Updated: 2024/01/29 01:26:31 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = server client server_bonus client_bonus
+NAME = server client
+NAME_BONUS = server_bonus client_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT = ./libft/libft.a
@@ -23,6 +24,7 @@ SERVER_BONUS_SRCS = server_bonus.c
 CLIENT_BONUS_SRCS = client_bonus.c
 
 all: $(NAME)
+bonus: $(NAME_BONUS)
 
 $(LIBFT):
 		$(MAKE) --no-print-directory -C ./libft
@@ -30,17 +32,26 @@ $(LIBFT):
 $(FT_PRINTF):
 		$(MAKE) --no-print-directory -C ./ft_printf
 		
-$(NAME): $(LIBFT) $(FT_PRINTF) $(SERVER_SRCS) $(SERVER_BONUS_SRCS) $(CLIENT_SRCS) $(CLIENT_BONUS_SRCS)
+$(NAME): $(LIBFT) $(FT_PRINTF) $(SERVER_SRCS)  $(CLIENT_SRCS) 
 	$(CC) $(CFLAGS) $(SERVER_SRCS) $(LIBFT) $(FT_PRINTF) -o server
-	$(CC) $(CFLAGS) $(SERVER_BONUS_SRCS) $(LIBFT) $(FT_PRINTF) -o server_bonus
 	$(CC) $(CFLAGS) $(CLIENT_SRCS) $(LIBFT) $(FT_PRINTF) -o client
-	$(CC) $(CFLAGS) $(CLIENT_BONUS_SRCS) $(LIBFT) $(FT_PRINTF) -o client_bonus
 	@echo "-----------[DONE]-----------"
 	@echo "[LIBFT] is ready           |"
 	@echo "[FT_PRINTF] is ready       |"
 	@echo "[SERVER] is ready.         |"
 	@echo "[CLIENT] is ready.         |"
 	@echo "-----------[DONE]-----------"
+
+$(NAME_BONUS): $(SERVER_BONUS_SRCS) $(CLIENT_BONUS_SRCS) $(LIBFT) $(FT_PRINTF)
+	$(CC) $(CFLAGS) $(CLIENT_BONUS_SRCS) $(LIBFT) $(FT_PRINTF) -o client_bonus
+	$(CC) $(CFLAGS) $(SERVER_BONUS_SRCS) $(LIBFT) $(FT_PRINTF) -o server_bonus
+	@echo "--------------[DONE]--------------"
+	@echo "[LIBFT] is ready                 |"
+	@echo "[FT_PRINTF] is ready             |"
+	@echo "[SERVER_BONUS] is ready.         |"
+	@echo "[CLIENT_BONUS] is ready.         |"
+	@echo "--------------[DONE]--------------"
+
 clean:
 	$(MAKE) clean --no-print-directory -C ./libft
 	$(MAKE) clean --no-print-directory -C ./ft_printf
@@ -51,7 +62,7 @@ clean:
 fclean: clean
 	$(MAKE) fclean --no-print-directory -C ./libft
 	$(MAKE) fclean --no-print-directory -C ./ft_printf
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_BONUS)
 	@echo "[ALL MINITALK] is clean.   |"
 re: fclean all
 

@@ -6,13 +6,14 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/04 10:31:55 by amousaid          #+#    #+#              #
-#    Updated: 2024/01/25 18:40:13 by amousaid         ###   ########.fr        #
+#    Updated: 2024/01/29 00:55:30 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 SRC= ft_atoi.c\
      ft_strlen.c\
+	 ft_isdigit.c\
  
 OBJ= $(SRC:.c=.o)
 CC= cc

@@ -6,13 +6,27 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:35:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/01/27 01:05:26 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:41:39 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
 #include "libft/libft.h"
 #include <signal.h>
+
+int	ft_check_pid(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (ft_isdigit(s[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void	ft_send_bit(int pid, char *s)
 {
@@ -46,6 +60,8 @@ int	main(int argc, char **argv)
 
 	if (argc == 3)
 	{
+		if (ft_check_pid(argv[1]) == 0)
+			return (ft_printf("3mrk chfti chi pid fih 7orof \n"));
 		pid = ft_atoi(argv[1]);
 		str = argv[2];
 		ft_send_bit(pid, str);
